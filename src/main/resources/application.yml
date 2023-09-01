@@ -1,0 +1,21 @@
+
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
+  application:
+    name: liquibase demo
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/aircondition
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 1234567
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  h2:
+    console:
+      enabled: true

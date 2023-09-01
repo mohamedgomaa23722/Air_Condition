@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+    <changeSet id="1" author="gomaa">
+        <createTable tableName="user">
+            <column name="id" autoIncrement="true" type="int">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+
+            <column name="givenName" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="familyName" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="birthDate" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="phoneNr" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="address">
+            <column name="streetNr" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="streetName" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="houseNr" type="varchar(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false" foreignKeyName="fk-user" referencedColumnNames="user(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="gomaa">
+        <addColumn tableName="address">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

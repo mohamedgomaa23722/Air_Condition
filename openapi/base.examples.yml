@@ -1,0 +1,20 @@
+BadRequestError400:
+  value:
+    code: 400
+    message: BadRequest
+    desc: invalid data entered please enter correct data
+ServerError500:
+  value:
+    code: 500
+    message: ServerError
+    desc: We have issue while processing your data
+UnAuthanticatedError401:
+  value:
+    code: 401
+    message: UnAuthanticated
+    desc: you're not uthorized to check this kind of data
+UnAuthorizedError403:
+  value:
+    code: 403
+    message: UnAuthorized
+    desc: you're un uthorized to check this kind of data

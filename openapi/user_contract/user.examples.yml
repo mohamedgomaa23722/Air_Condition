@@ -1,0 +1,15 @@
+GetUsersError404:
+  value:
+    code: 404
+    message: NotFound
+    desc: There are no user with this id
+PostUserError409:
+  value:
+    code: 409
+    message: DuplicatedEntry
+    desc: Phone Number already exist
+DeleteStatus:
+  value:
+    status: successfully Deleted
+    date: "5-12-2023"
+    message: Your data successfully Deleted

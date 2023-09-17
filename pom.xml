@@ -89,6 +89,10 @@
             <version>1.5.5.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -154,7 +158,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/openapi/contract.yml</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/base_contract.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>${project.groupId}.${project-package}.api</apiPackage>
                             <modelPackage>${project.groupId}.${project-package}.dto</modelPackage>
@@ -178,7 +182,7 @@
                     <!--								<serializableModel>true</serializableModel>-->
                     <!--							</configOptions>-->
 
-                    <!--							<inputSpec>${project.basedir}/openapi/contract.yml</inputSpec>-->
+                    <!--							<inputSpec>${project.basedir}/openapi/user.contract.yml</inputSpec>-->
                     <!--							<generatorName>spring</generatorName>-->
                     <!--							<apiPackage>${project.groupId}.${project.packaging}.api</apiPackage>-->
                     <!--							<modelPackage>${project.groupId}.${project-package}.dto</modelPackage>-->

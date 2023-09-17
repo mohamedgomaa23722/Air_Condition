@@ -1,0 +1,21 @@
+StatusResponse:
+  properties:
+    status:
+      type: string
+      example: successfully added
+    date:
+      type: string
+      example: "5-12-2023"
+    message:
+      type: string
+      example: Your data successfully updated
+
+Error:
+  properties:
+    code:
+      type: integer
+      format: int32
+    message:
+      type: string
+    desc:
+      type: string

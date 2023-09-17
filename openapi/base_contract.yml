@@ -1,0 +1,13 @@
+openapi: 3.0.1
+info:
+  title: AirCondition Application
+  version: "0.1"
+paths:
+  /users:
+    $ref: './user_contract/users.path.yml#/Users'
+  /users/{id}:
+    $ref: './user_contract/users.path.yml#/Users_id'
+  /products:
+    $ref: './product_contract/product.paths.yml#/products'
+  /products/search:
+    $ref: './product_contract/product.paths.yml#/productFilter'

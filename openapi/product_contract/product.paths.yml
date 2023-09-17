@@ -1,0 +1,130 @@
+products:
+  get:
+    tags:
+      - ProductEndPoint
+    operationId: getProducts
+    parameters:
+      - in: query
+        required: false
+        name: page
+        schema:
+          type: integer
+          default: 0
+      - in: query
+        required: false
+        name: size
+        schema:
+          type: integer
+          default: 10
+    summary: Get Products by page and size of the page
+    description: |
+      This End point to get all products
+    responses:
+      '200':
+        description: Ok
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'product.models.yml#/Product'
+      '500':
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              ServerError:
+                $ref: '../base.examples.yml#/ServerError500'
+  post:
+    description: Add new product to our list
+    summary: Post End point for insert new Product
+    operationId: CreateProduct
+    tags:
+      - ProductEndPoint
+    parameters:
+      - in: header
+        name: x-token
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: 'product.models.yml#/Product'
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/StatusResponse'
+      '400':
+        description: BAD REQUEST
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+                $ref: '../base.examples.yml#/BadRequestError400'
+
+      '401':
+        description: UnAuth
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+                $ref: '../base.examples.yml#/UnAuthanticatedError401'
+      '403':
+        description: UnAuthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+                $ref: '../base.examples.yml#/UnAuthorizedError403'
+
+      '500':
+        description: SERVER ERROR
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+                $ref: '../base.examples.yml#/ServerError500'
+
+productFilter:
+    get:
+      summary: This end point use to filter by entries
+      operationId: productFilter
+      parameters:
+        - in: query
+          required: false
+          name: page
+          schema:
+            type: integer
+            default: 0
+        - in: query
+          required: false
+          name: size
+          schema:
+            type: integer
+            default: 10
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'product.models.yml#/ProductFilter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'product.models.yml#/Product'

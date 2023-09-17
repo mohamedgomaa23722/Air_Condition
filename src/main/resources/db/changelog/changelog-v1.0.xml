@@ -7,34 +7,46 @@
     <changeSet id="1" author="gomaa">
         <createTable tableName="user">
             <column name="id" autoIncrement="true" type="int">
-                <constraints primaryKey="true" nullable="false" unique="true"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
 
-            <column name="givenName" type="varchar(45)">
+            <column name="given_name" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="familyName" type="varchar(45)">
+            <column name="family_name" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="birthDate" type="varchar(45)">
+            <column name="birth_date" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="phoneNr" type="varchar(12)">
+            <column name="phone_nr" type="varchar(12)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="role" type="varchar(13)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
         <createTable tableName="address">
-            <column name="streetNr" type="varchar(9)">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="street_nr" type="varchar(9)">
                 <constraints nullable="false"/>
             </column>
-            <column name="streetName" type="varchar(45)">
+            <column name="street_name" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
-            <column name="houseNr" type="varchar(5)">
+            <column name="house_nr" type="varchar(5)">
                 <constraints nullable="false"/>
             </column>
             <column name="city" type="varchar(20)">
@@ -43,16 +55,15 @@
             <column name="country" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="userId" type="int">
-                <constraints nullable="false" foreignKeyName="fk-user" referencedColumnNames="user(id)"/>
+            <column name="user_id" type="int">
             </column>
         </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="address"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
     </changeSet>
-    <changeSet id="2" author="gomaa">
-        <addColumn tableName="address">
-            <column name="id" type="int">
-                <constraints primaryKey="true" nullable="false" unique="true"/>
-            </column>
-        </addColumn>
-    </changeSet>
+
 </databaseChangeLog>

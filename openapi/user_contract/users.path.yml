@@ -1,0 +1,279 @@
+Users:
+  get:
+    parameters:
+      - in: header
+        name: x-token
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - in: query
+        name: count
+        required: false
+        schema:
+          type: integer
+          default: 10
+    tags:
+      - UsersEndPoints
+    summary: Get all users end point
+    description: |
+
+      # This End Point Help Admins To Show All Users:
+        - This End point only allowed for admins otherwise not allowed to see our user data
+        - provide all users data with paggination it will included brief data not sensitive data
+    operationId: getUsers
+    responses:
+      '200':
+        description: Ok
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'user.model.yml#/GetUserResponse'
+
+      '404':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              errorResponse:
+                $ref: 'user.examples.yml#/GetUsersError404'
+
+      '403':
+        description: UnAuthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              errorResponse:
+                $ref: '../base.examples.yml#/UnAuthorizedError403'
+
+  post:
+    tags:
+      - UsersEndPoints
+    summary: Post User End Point help user to rergister
+    description: |
+      ### This end ponit will help user To register
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: 'user.model.yml#/PostUserRequest'
+    operationId: createUser
+
+    responses:
+      '200':
+        description: OK Created
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/StatusResponse'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              errorResponse:
+                $ref: '../base.examples.yml#/BadRequestError400'
+      '409':
+        description: Duplicated Entry
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              errorResponse:
+                $ref: 'user.examples.yml#/PostUserError409'
+
+      '500':
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              errorResponse:
+                $ref: '../base.examples.yml#/ServerError500'
+Users_id:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+
+    - in: header
+      name: x-token
+      required: true
+      schema:
+        type: string
+
+  get:
+    tags:
+      - UsersEndPoints
+    operationId: getUser
+
+    responses:
+      '200':
+        description: OK Created
+        content:
+          application/json:
+            schema:
+              $ref: 'user.model.yml#/GetUserResponse'
+      '404':
+        description: NotFound
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              InvalidBody:
+                $ref: '../base.examples.yml#/BadRequestError400'
+      '403':
+        description: UnAuthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              UnAuthraized:
+                $ref: '../base.examples.yml#/UnAuthorizedError403'
+      '500':
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              ServerError:
+                $ref: '../base.examples.yml#/ServerError500'
+
+  put:
+    summary: put end point for update user data
+    description: |
+      ## This end point help user to update his information so we need to provide two parameters : 
+        - User id
+        - User token
+      
+       ## With out those pram it will throw exception
+    tags:
+      - UsersEndPoints
+    operationId: updateUser
+
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: 'user.model.yml#/PutUserRequest'
+    responses:
+      '200':
+        description: OK Created
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/StatusResponse'
+      '401':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+                $ref: '../base.examples.yml#/UnAuthanticatedError401'
+      '403':
+        description: UnAuthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            example:
+              $ref: '../base.examples.yml#/UnAuthorizedError403'
+      '404':
+        description: NotFound
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              InvalidBody:
+                $ref: 'user.examples.yml#/GetUsersError404'
+      '500':
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              ServerError:
+                $ref: '../base.examples.yml#/ServerError500'
+
+  delete:
+    summary: Delete user end point
+    description: |
+      ## This end point help user to delete his account so we need to provide two parameters : 
+        - User id 
+        - User token to check credintials
+      
+       ## With out those pram it will throw exception
+    tags:
+      - UsersEndPoints
+    operationId: deleteUser
+
+    responses:
+      '200':
+        description: OK Created
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/StatusResponse'
+            examples:
+              status:
+                $ref: 'user.examples.yml#/DeleteStatus'
+
+      '401':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              InvalidBody:
+                $ref: '../base.examples.yml#/UnAuthanticatedError401'
+      '403':
+        description: UnAuthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              UnAuthraized:
+                $ref: '../base.examples.yml#/UnAuthorizedError403'
+      '404':
+        description: NotFound
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              InvalidBody:
+                $ref: 'user.examples.yml#/GetUsersError404'
+      '500':
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '../base.models.yml#/Error'
+            examples:
+              ServerError:
+                $ref: '../base.examples.yml#/ServerError500'

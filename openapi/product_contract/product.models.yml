@@ -1,0 +1,40 @@
+Product:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      readonly: true
+    serialNr:
+      type: string
+      example: GXDSG23GA
+    title:
+      type: string
+      example: Carrier
+    description:
+      type: string
+      example: This air condition has a lot of features
+    brand:
+      type: string
+      example: Fresh
+    price:
+      type: number
+      example: 22000.55
+    pto:
+      type: string
+      example: 12345
+    production_date:
+      type: string
+      example: "2-12-2022"
+    seller:
+      $ref: '../user_contract/user.model.yml#/User'
+ProductFilter:
+  type: object
+  properties:
+    title:
+      type: string
+    brand:
+      type: string
+    price:
+      type: number
+

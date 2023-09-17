@@ -31,7 +31,7 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsers_Happy() throws Exception {
-        when(userService.getUsers(any()))
+        when(userService.getUsers(any(), any(), any()))
                 .thenReturn(new ArrayList<>());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users")

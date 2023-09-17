@@ -1,0 +1,97 @@
+User:
+  required:
+    - givenName
+    - familyName
+    - birthDate
+    - role
+    - phoneNr
+  properties:
+    id:
+      type: integer
+      format: int32
+      example: 50
+      readOnly: true
+    givenName:
+      type: string
+      example: Mohamed
+    familyName:
+      type: string
+      example: Gomaa
+    birthDate:
+      type: string
+      example: "11-12-1997"
+    phoneNr:
+      type: string
+      example: 01068053092
+    role:
+      type: string
+      enum:
+        - CUSTOMER_ROLE
+        - SELLER_ROLE
+      example: CUSTOMER_ROLE
+Seller:
+  properties:
+    id:
+      type: integer
+      format: int32
+      example: 50
+      readOnly: true
+    givenName:
+      type: string
+      example: Mohamed
+Address:
+  properties:
+    streetNr:
+      type: string
+      example: "12"
+    streetName:
+      type: string
+      example: sharaw street
+    houseNr:
+      type: string
+      example: 5
+    city:
+      type: string
+      example: cairo
+    country:
+      type: string
+      example: Egypt
+
+GetUserResponse:
+  allOf:
+    - $ref: 'user.model.yml#/User'
+  properties:
+    addresses:
+      type: array
+      items:
+        $ref: 'user.model.yml#/Address'
+
+PostUserRequest:
+  allOf:
+    - $ref: 'user.model.yml#/User'
+  properties:
+    password:
+      type: string
+      example: 4545454
+      writeOnly: true
+    addresses:
+      type: array
+      minLength: 1
+      items:
+        $ref: 'user.model.yml#/Address'
+
+PutUserRequest:
+  allOf:
+    - $ref: 'user.model.yml#/User'
+  properties:
+    password:
+      type: string
+      example: 4545454
+      writeOnly: true
+    addresses:
+      type: array
+      minLength: 1
+      items:
+        $ref: 'user.model.yml#/Address'
+
+

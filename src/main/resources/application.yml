@@ -16,9 +16,9 @@ spring:
     properties:
       hibernate:
         jdbc:
-#          batch_size: 10
+          batch_size: 10
           generate_statistics: true
-#          order_inserts: true
+          order_inserts: true
 
 server:
   jetty:

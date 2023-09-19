@@ -1,5 +1,6 @@
 package com.mg.aircondition.model;
 
+import com.mg.aircondition.service.CompositKey;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,15 +13,9 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(com.mg.aircondition.service.IdClass.class)
 public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Id
-    private int version;
+    @EmbeddedId
+    private CompositKey compositKey;
 
     private String serialNr;
 

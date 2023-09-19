@@ -20,16 +20,22 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     private final ProductMapper productMapper;
-
+    static int index = 0;
     public boolean batchInsert(List<Product> products, String name) {
 //        products.stream()
 //                .parallel()
 //                .forEach(product -> {
-//                        productRepository.save(productMapper.toEntity(product));
+//                    com.mg.aircondition.model.Product entity = productMapper.toEntity(product);
+//                    entity.setCompositKey(new CompositKey(null, 1 + index));
+//                    index++;
+//                    productRepository.save(entity);
 //                });
 
         List<com.mg.aircondition.model.Product> entityList = productMapper.toEntityList(products);
-        entityList.forEach(product -> product.setVersion(1));
+        for (com.mg.aircondition.model.Product product : entityList) {
+            product.setCompositKey(new CompositKey(null, 1 + index));
+            index++;
+        }
         productRepository.saveAll(entityList);
 
         return true;

@@ -6,9 +6,9 @@ spring:
     name: liquibase demo
 
   datasource:
-    url: jdbc:mysql://localhost:3306/aircondition
+    url: jdbc:mysql://mysqldb:3306/aircondition
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    username: gomaa
     password: 1234567
 
   jpa:
@@ -24,7 +24,6 @@ spring:
 
 
 server:
-  port: 8087
   jetty:
     threads:
       idle-timeout: 2000ms

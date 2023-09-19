@@ -31,12 +31,7 @@ public class ProductService {
 //                    productRepository.save(entity);
 //                });
 
-        List<com.mg.aircondition.model.Product> entityList = productMapper.toEntityList(products);
-        for (com.mg.aircondition.model.Product product : entityList) {
-            product.setCompositKey(new CompositKey(null, 1 + index));
-            index++;
-        }
-        productRepository.saveAll(entityList);
+        productRepository.saveAll(productMapper.toEntityList(products));
 
         return true;
     }

@@ -1,33 +1,30 @@
-
 spring:
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:db/changelog/changelog-master.xml
   application:
     name: liquibase demo
 
   datasource:
-    url: jdbc:mysql://mysqldb:3306/aircondition
+    url: jdbc:mysql://localhost:3306/aircondition
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: gomaa
+    username: root
     password: 1234567
 
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         jdbc:
-          batch_size: 10
+          batch_size: 20
         generate_statistics: true
         order_inserts: true
-
-
-  h2:
-    console:
-      enabled: none
-
+        order_updates: true
 
 
 server:
+  port: 8087
   jetty:
     threads:
       idle-timeout: 2000ms

@@ -14,7 +14,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sequance")
+    @SequenceGenerator(name = "product_sequance", sequenceName = "product_sequance")
     private Integer id;
 
     private int version;

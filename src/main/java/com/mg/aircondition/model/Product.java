@@ -1,6 +1,5 @@
 package com.mg.aircondition.model;
 
-import com.mg.aircondition.service.CompositKey;
 import jakarta.persistence.*;
 import lombok.*;
 

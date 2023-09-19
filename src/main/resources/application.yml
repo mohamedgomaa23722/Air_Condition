@@ -12,20 +12,13 @@ spring:
     username: gomaa
     password: 1234567
 
-#  jpa:
-#    properties:
-#      hibernate:
-#        jdbc:
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
 #          batch_size: 10
-#          generate_statistics: true
+          generate_statistics: true
 #          order_inserts: true
-
-
-  h2:
-    console:
-      enabled: none
-
-
 
 server:
   jetty:

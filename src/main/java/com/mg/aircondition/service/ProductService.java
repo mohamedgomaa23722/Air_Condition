@@ -21,13 +21,13 @@ public class ProductService {
     private final ProductMapper productMapper;
 
     public boolean batchInsert(List<Product> products, String name) {
-//        products.stream()
-//                .parallel()
-//                .forEach(product -> {
-//                        productRepository.save(productMapper.toEntity(product));
-//                });
+        products.stream()
+                .parallel()
+                .forEach(product -> {
+                        productRepository.save(productMapper.toEntity(product));
+                });
 
-        productRepository.saveAll(productMapper.toEntityList(products));
+//        productRepository.saveAll(productMapper.toEntityList(products));
         return true;
     }
 

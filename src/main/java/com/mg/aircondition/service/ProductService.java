@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
@@ -27,7 +28,10 @@ public class ProductService {
 //                        productRepository.save(productMapper.toEntity(product));
 //                });
 
-       productRepository.saveAll(productMapper.toEntityList(products));
+        List<com.mg.aircondition.model.Product> entityList = productMapper.toEntityList(products);
+        entityList.forEach(product -> product.setVersion(1));
+        productRepository.saveAll(entityList);
+
         return true;
     }
 

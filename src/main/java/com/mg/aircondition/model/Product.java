@@ -12,11 +12,15 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(com.mg.aircondition.service.IdClass.class)
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Id
+    private int version;
 
     private String serialNr;
 

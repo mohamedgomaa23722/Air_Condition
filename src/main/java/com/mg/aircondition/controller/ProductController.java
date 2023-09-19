@@ -34,18 +34,22 @@ public class ProductController implements ProductsApi {
 
 
     @PostMapping("/uploadmultiProd")
-    public boolean createProducts(@RequestBody BatchUpload batchUpload, @RequestParam(name = "name", required = false) String name){
+    public BatchUploadResponse createProducts(@RequestBody BatchUpload batchUpload, @RequestParam(name = "name", required = false) String name){
+        BatchUploadResponse batchUploadResponse = new BatchUploadResponse();
+
         long startTime = System.currentTimeMillis();
+        batchUploadResponse.isUploaded = productService.batchInsert(batchUpload.products, name);
+        batchUploadResponse.timeInSeconds = (float) (System.currentTimeMillis() - startTime) / 1000;
 
-        boolean b = productService.batchInsert(batchUpload.products, name);
-
-        float timeInSecond = (float) (System.currentTimeMillis() - startTime) / 1000;
-        System.out.println("Time in Second = " + timeInSecond);
-        return b;
+        return batchUploadResponse;
     }
 }
 class BatchUpload{
     public List<Product> products;
 }
 
+class BatchUploadResponse{
+    public boolean isUploaded;
+    public float timeInSeconds;
+}
 //13.300004

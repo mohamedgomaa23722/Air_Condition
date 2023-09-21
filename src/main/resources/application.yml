@@ -15,12 +15,12 @@ spring:
     hibernate:
       ddl-auto: create
     properties:
-#      hibernate:
-#        jdbc:
-#          batch_size: 50
+      hibernate:
+        jdbc:
+          batch_size: 5000
         generate_statistics: true
-#        order_inserts: true
-#        order_updates: true
+        order_inserts: true
+        order_updates: true
 
 
 server:

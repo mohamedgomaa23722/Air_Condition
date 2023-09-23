@@ -28,7 +28,7 @@ pipeline{
                 bat "docker build -t gomaa123/aircondition:V${BUILD_NUMBER} ."
             }
 
-            step('Push Image) {
+            step('Push Image') {
                 bat "docker push gomaa123/aircondition:V${BUILD_NUMBER}"
             }
 

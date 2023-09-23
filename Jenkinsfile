@@ -23,11 +23,23 @@ pipeline{
             bat'mvn test'
         }
     }
-
+    stage('Clear') {
+        steps {
+            script{
+                bat 'docker login -u gomaa123 -p 123456789'
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start Clearing old docker images >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                if docker images -a | grep "gomaa123*" | awk '{print $1":"$2}' | xargs docker rmi -f; then
+                    printf 'Clearing old images succeeded\n'
+                else
+                    printf 'Clearing old images failed\n'
+                fi
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Finished Clearing old docker images >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+            }
+        }
+    }
     stage('Delivery'){
         steps{
             script{
-              bat 'docker login -u gomaa123 -p 123456789'
               bat "docker build -t gomaa123/aircondition:V${BUILD_NUMBER} ."
               bat "docker push gomaa123/aircondition:V${BUILD_NUMBER}"
             //bat "docker run --network=springboot-mysql-net --name=springboot-containerwithV${BUILD_NUMBER} -p 8084:8080 -d gomaa123/aircondition:V${BUILD_NUMBER}"

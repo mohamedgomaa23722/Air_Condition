@@ -23,20 +23,7 @@ pipeline{
             bat'mvn test'
         }
     }
-    stage('Clear') {
-        steps {
-            script{
-                bat 'docker login -u gomaa123 -p 123456789'
-                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start Clearing old docker images >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-                if docker images -a | grep "gomaa123*" | awk '{print $1":"$2}' | xargs docker rmi -f; then
-                    printf 'Clearing old images succeeded\n'
-                else
-                    printf 'Clearing old images failed\n'
-                fi
-                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Finished Clearing old docker images >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-            }
-        }
-    }
+
     stage('Delivery'){
         steps{
             script{

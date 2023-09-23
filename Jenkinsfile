@@ -10,6 +10,7 @@ pipeline{
             bat 'mvn clean install'
 	    }
     }
+
     stage('Test'){
         steps{
             bat'mvn test'
@@ -18,12 +19,19 @@ pipeline{
 
     stage('Delivery'){
         steps{
-            script{
-              bat 'docker login -u gomaa123 -p 123456789'
-              bat "docker build -t gomaa123/aircondition:V${BUILD_NUMBER} ."
-              bat "docker push gomaa123/aircondition:V${BUILD_NUMBER}"
-            //bat "docker run --network=springboot-mysql-net --name=springboot-containerwithV${BUILD_NUMBER} -p 8084:8080 -d gomaa123/aircondition:V${BUILD_NUMBER}"
+            step('login') {
+               bat 'docker login -u gomaa123 -p 123456789'
             }
+
+
+            step('Build Image'){
+                bat "docker build -t gomaa123/aircondition:V${BUILD_NUMBER} ."
+            }
+
+            step('Push Image) {
+                bat "docker push gomaa123/aircondition:V${BUILD_NUMBER}"
+            }
+
         }
     }
 

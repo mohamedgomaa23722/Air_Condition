@@ -4,13 +4,6 @@ pipeline{
     maven 'maven-3.9.4'
   }
   stages{
-    stage('clean'){
-        steps{
-            script{
-                if docker images -a | grep "gomaa123*" | awk '{print $1":"$2}'
-            }
-        }
-    }
     stage('Build'){
        steps{
             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mohamedgomaa23722/Air_Condition.git']])
@@ -20,7 +13,7 @@ pipeline{
 
     stage('Test'){
         steps{
-            bat'mvn test'
+            bat 'mvn test'
         }
     }
 

@@ -20,6 +20,7 @@ pipeline{
     stage('Delivery'){
         steps{
             script{
+              sh  'date'
               bat "docker build -t gomaa123/aircondition:V${BUILD_NUMBER} ."
               bat "docker push gomaa123/aircondition:V${BUILD_NUMBER}"
             //bat "docker run --network=springboot-mysql-net --name=springboot-containerwithV${BUILD_NUMBER} -p 8084:8080 -d gomaa123/aircondition:V${BUILD_NUMBER}"

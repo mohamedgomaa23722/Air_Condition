@@ -6,10 +6,10 @@ spring:
     name: liquibase demo
 
   datasource:
-    url: jdbc:mysql://mysqldb:3306/aircondition
+    url: jdbc:mysql://${DB_HOST}}/${DB_NAME}?useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: gomaa
-    password: 1234567
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
